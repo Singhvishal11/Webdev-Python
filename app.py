@@ -12,6 +12,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+
+
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
@@ -20,7 +22,8 @@ class Todo(db.Model):
     def __repr__(self):
         return '<Task %r>'  %self.id
 
- 
+with app.app_context():
+    db.create_all()
 
 @app.route('/', methods =['POST' , 'GET'])
 def index():
